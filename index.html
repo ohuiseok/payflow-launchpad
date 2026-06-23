@@ -1,0 +1,37 @@
+<h1>시연 서버를 준비하고 있습니다</h1>
+
+<p>
+  비용 절감을 위해 시연 서버는 온디맨드로 실행됩니다.<br />
+  최초 접속 시 서버 부팅에 약간의 시간이 걸릴 수 있습니다.
+  약 3분 소요됩니다.
+</p>
+
+<p id="status">서버를 켜는 중입니다...</p>
+
+<script>
+  const START_API = "https://API_GATEWAY_URL/start-demo";
+  const HEALTH_URL = "http://54.116.24.154:8080/health";
+  const DEMO_URL = "http://54.116.24.154:19006";
+
+  async function startServer() {
+    await fetch(START_API, { method: "POST" });
+  }
+
+  async function checkHealth() {
+    try {
+      const res = await fetch(HEALTH_URL, { cache: "no-store" });
+
+      if (res.ok) {
+        location.href = DEMO_URL;
+        return;
+      }
+    } catch (e) {
+      document.getElementById("status").innerText =
+        "서버 부팅 중입니다. 잠시만 기다려주세요.";
+    }
+
+    setTimeout(checkHealth, 5000);
+  }
+
+  startServer().finally(checkHealth);
+</script>
