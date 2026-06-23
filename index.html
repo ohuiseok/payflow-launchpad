@@ -9,9 +9,9 @@
 <p id="status">서버를 켜는 중입니다...</p>
 
 <script>
-  const START_API = "https://API_GATEWAY_URL/start-demo";
-  const HEALTH_URL = "http://54.116.24.154:8080/health";
-  const DEMO_URL = "http://54.116.24.154:19006";
+    const START_API  = "https://API_GATEWAY_URL/start-demo";
+    const HEALTH_URL = "https://www.pay-flow.cloud/health";
+    const DEMO_URL   = "https://app.pay-flow.cloud";
 
   async function startServer() {
     await fetch(START_API, { method: "POST" });
